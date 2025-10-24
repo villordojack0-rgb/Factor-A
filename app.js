@@ -3,12 +3,8 @@ const secciones = document.querySelectorAll(".section");
 const configBtn = document.getElementById("configBtn");
 
 botonesMenu.forEach(boton => {
-  boton.addEventListener("click", () => {
-    const sectionId = boton.dataset.section;
-    mostrarSeccion(sectionId);
-  });
+  boton.addEventListener("click", () => mostrarSeccion(boton.dataset.section));
 });
-
 configBtn.addEventListener("click", () => mostrarSeccion("config"));
 
 function mostrarSeccion(id) {
@@ -21,19 +17,17 @@ function mostrarSubseccion(id) {
   document.getElementById(id).classList.remove("hidden");
 }
 
-// ===================== ESCUELA =====================
+// ======== ESCUELA ========
 const materiaForm = document.getElementById("materiaForm");
 const materiaLista = document.getElementById("materiaLista");
 let materias = JSON.parse(localStorage.getItem("materias")) || [];
 
-materiaForm.addEventListener("submit", e => {
+materiaForm?.addEventListener("submit", e => {
   e.preventDefault();
-  const nombre = document.getElementById("materiaNombre").value.trim();
-  const dia = document.getElementById("materiaDia").value.trim();
+  const nombre = materiaNombre.value.trim();
+  const dia = materiaDia.value.trim();
   if (!nombre || !dia) return;
-
-  const nueva = { nombre, dia };
-  materias.push(nueva);
+  materias.push({ nombre, dia });
   localStorage.setItem("materias", JSON.stringify(materias));
   materiaForm.reset();
   renderMaterias();
@@ -41,7 +35,7 @@ materiaForm.addEventListener("submit", e => {
 
 function renderMaterias() {
   materiaLista.innerHTML = "";
-  materias.forEach((m, i) => {
+  materias.forEach(m => {
     const div = document.createElement("div");
     div.className = "tarjeta";
     div.innerHTML = `<strong>${m.nombre}</strong><br>${m.dia}`;
@@ -50,20 +44,18 @@ function renderMaterias() {
 }
 renderMaterias();
 
-// ===================== MÉDICO =====================
+// ======== MÉDICO ========
 const turnoForm = document.getElementById("turnoForm");
 const turnoLista = document.getElementById("turnoLista");
 let turnos = JSON.parse(localStorage.getItem("turnos")) || [];
 
-turnoForm.addEventListener("submit", e => {
+turnoForm?.addEventListener("submit", e => {
   e.preventDefault();
-  const fecha = document.getElementById("turnoFecha").value.trim();
-  const hora = document.getElementById("turnoHora").value.trim();
-  const lugar = document.getElementById("turnoLugar").value.trim();
+  const fecha = turnoFecha.value.trim();
+  const hora = turnoHora.value.trim();
+  const lugar = turnoLugar.value.trim();
   if (!fecha || !hora || !lugar) return;
-
-  const nuevo = { fecha, hora, lugar };
-  turnos.push(nuevo);
+  turnos.push({ fecha, hora, lugar });
   localStorage.setItem("turnos", JSON.stringify(turnos));
   turnoForm.reset();
   renderTurnos();
@@ -71,7 +63,7 @@ turnoForm.addEventListener("submit", e => {
 
 function renderTurnos() {
   turnoLista.innerHTML = "";
-  turnos.forEach((t, i) => {
+  turnos.forEach(t => {
     const div = document.createElement("div");
     div.className = "tarjeta";
     div.innerHTML = `<strong>${t.fecha}</strong> - ${t.hora}<br>${t.lugar}`;
@@ -80,29 +72,27 @@ function renderTurnos() {
 }
 renderTurnos();
 
-// ===================== CONFIGURACIÓN =====================
+// ======== CONFIG ========
 const modoSelect = document.getElementById("modoSelect");
 const fuenteSelect = document.getElementById("fuenteSelect");
 
-modoSelect.addEventListener("change", () => {
+modoSelect?.addEventListener("change", () => {
   const modo = modoSelect.value;
-  document.body.classList.toggle("dark", modo === "oscuro");
+  document.body.classList.toggle("claro", modo === "claro");
   localStorage.setItem("modo", modo);
 });
 
-fuenteSelect.addEventListener("change", () => {
+fuenteSelect?.addEventListener("change", () => {
   const fuente = fuenteSelect.value;
   document.body.style.fontFamily = fuente;
   localStorage.setItem("fuente", fuente);
 });
 
-// Cargar preferencias
 window.addEventListener("load", () => {
-  const modo = localStorage.getItem("modo") || "claro";
+  const modo = localStorage.getItem("modo") || "oscuro";
+  if (modo === "claro") document.body.classList.add("claro");
   modoSelect.value = modo;
-  if (modo === "oscuro") document.body.classList.add("dark");
-
-  const fuente = localStorage.getItem("fuente") || "Consolas";
+  const fuente = localStorage.getItem("fuente") || "Roboto";
   fuenteSelect.value = fuente;
   document.body.style.fontFamily = fuente;
 });
