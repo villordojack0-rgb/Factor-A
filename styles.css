@@ -1,0 +1,158 @@
+:root {
+  --azul-led: #00bfff;
+  --azul-sec: #007bff;
+  --fondo: #0a0e1a;
+  --fondo-sec: #060812;
+  --texto: #e8f0ff;
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: Consolas, Arial, sans-serif;
+  transition: all 0.3s ease;
+}
+
+header {
+  background: var(--azul-sec);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  box-shadow: 0 0 10px var(--azul-led);
+}
+
+h1 {
+  font-size: 1.4rem;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background: var(--fondo-sec);
+  padding: 10px;
+  box-shadow: inset 0 0 5px var(--azul-led);
+}
+
+.menu-btn {
+  border: 1px solid var(--azul-led);
+  background: transparent;
+  color: var(--texto);
+  margin: 5px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.3s;
+}
+
+.menu-btn:hover {
+  background: var(--azul-sec);
+  transform: scale(1.05);
+}
+
+main {
+  padding: 20px;
+}
+
+.submenu {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.submenu button {
+  border: 1px solid var(--azul-led);
+  background: transparent;
+  color: var(--texto);
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.submenu button:hover {
+  background: var(--azul-sec);
+}
+
+form {
+  margin-bottom: 15px;
+}
+
+input {
+  background: var(--fondo-sec);
+  color: var(--texto);
+  border: 1px solid var(--azul-led);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 3px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.icon-placeholder {
+  width: 20px;
+  height: 20px;
+  background: white;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.logo {
+  width: 35px;
+  height: 35px;
+}
+
+.hidden {
+  display: none;
+}
+
+.section {
+  animation: fadeIn 0.4s ease;
+}
+
+#materiaLista, #turnoLista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tarjeta {
+  background: var(--fondo-sec);
+  border: 1px solid var(--azul-led);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px var(--azul-led);
+}
+
+.config-item {
+  margin-bottom: 15px;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  border-top: 1px solid var(--azul-led);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 700px) {
+  nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    justify-content: space-around;
+  }
+  main { padding-bottom: 70px; }
+}
